@@ -13,18 +13,18 @@ import jakarta.persistence.EntityNotFoundException;
 public class ControllerExceptionHandler {
     
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity threatDuplicateEntry(DataIntegrityViolationException ex){
+    public ResponseEntity<?> threatDuplicateEntry(DataIntegrityViolationException ex){
         ExceptionDTO exceptionDTO = new ExceptionDTO("Already registered user ", "400");
         return ResponseEntity.badRequest().body(exceptionDTO);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity threat404(EntityNotFoundException ex){
+    public ResponseEntity<?> threat404(EntityNotFoundException ex){
         return ResponseEntity.notFound().build();
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity threat500(Exception ex){
+    public ResponseEntity<?> threat500(Exception ex){
         ExceptionDTO exceptionDTO = new ExceptionDTO(ex.getMessage(), "500");
         return ResponseEntity.status(500).body(exceptionDTO);
     }

@@ -15,6 +15,8 @@ import com.simpleBankTransfer.simpleBankTransfer.DTO.UserDTO;
 import com.simpleBankTransfer.simpleBankTransfer.entities.user.User;
 import com.simpleBankTransfer.simpleBankTransfer.services.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController()
 @RequestMapping("/users")
 public class UserController {
@@ -23,7 +25,7 @@ public class UserController {
     private UserService userService;
     
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody UserDTO user){
+    public ResponseEntity<User> createUser(@RequestBody @Valid UserDTO user){
         User newUser = userService.createUser(user);
 
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
